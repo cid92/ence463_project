@@ -1,0 +1,69 @@
+#AS Contoller
+
+Ride/mode
+  change ride/mode
+
+  current ride/mode
+
+Gui
+  Update
+
+  change screen
+
+#Wheel Simulator
+
+Road Surface generation
+  Initilise
+
+  Current road surface
+
+  Change rode type
+
+Gui
+  Update
+
+  change screen
+
+
+#Both
+
+ADC
+  Initilise
+    ADC0
+    ADC1
+    ADC2
+  Read
+    ADC0
+    ADC1
+    ADC2
+
+PWM
+  Initilise
+    PWM1
+    PWM4
+    PWM5
+  Change Duty cycle
+    PWM1
+    PWM4
+    PWM5
+  Stop
+    PWM1
+    PWM4
+    PWM5
+
+Buttons
+  Initilise
+
+  Which button was pressed
+
+  De-bouncing Code
+
+Messaging
+  Initilise
+
+  Message to send
+
+  Receive message - interrupt
+
+
+Design copies explained

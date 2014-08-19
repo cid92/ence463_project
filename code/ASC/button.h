@@ -4,7 +4,7 @@
 //! Date: 20 August 2014
 //! file: "button.h"
 //!
-//! This modules read the buttons and apply button debounced.
+//! This module reads the buttons and apply button debounced.
 //*****************************************************************************
 #ifndef BUTTON_H_
 #define BUTTON_H_

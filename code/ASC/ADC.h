@@ -15,6 +15,9 @@ extern float readADC(int toreadADC );
 /*initilises a number of ADC inputs*/
 extern void initADC(int howmany);
 
+extern void startADC (int numADC);
+
+extern void stopADC (int numADC);
 
 
 #endif /* ADC_H_ */

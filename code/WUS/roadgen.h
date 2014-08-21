@@ -11,15 +11,16 @@
 #ifndef ROADGEN_H_
 #define ROADGEN_H_
 
-#include "carspeed.h"
+#include "carspeed.h" 
 
 struct SimGen {
 	float dzR;
 	float vzR;
 };
+/*Return the road type value. It can either be a float or uint8_t*/
+extern uint8_t RoadType(void);
 
-extern int returnRoadType(void);
-
-extern SimGen roadSurfGen(float currSpeed, int roadType, float tStep);
+/*Generate the road surface with pseudo random number generator */
+extern SimGen roadSurfGen(float currSpeed, uint8_t roadType, float tStep);
 
 #endif /* ROADGEN_H_ *

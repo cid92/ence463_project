@@ -2,19 +2,20 @@
 //!	ENCE463 Project
 //! Author: Cid Gilani
 //! Date: 20 August 2014
-//! file: "sensors.h"
+//! file: "carsim.h"
 //!
-//! This module calculates the sensor outputs required to be transmitted to ASC via PWM signals
+//! This module simulates the car and produce sensor outputs which are be transmitted to ASC via PWM signals
 //**********************************************************************************************
 
-#ifndef SENSORS_H_
-#define SENSORS_H_
+#ifndef CARSIM_H_
+#define CARSIM_H_
 
 #include "carparameters.h"
 #include "roadgen.h"
 #include "pwm.h"
 #include "ADC.h"
 
+/*Simulate the car suspensions and generate PWM signal to send the sensor outputs to ASC*/
 extern  SimOut sensorOutput(SimGen surfaceBump, ConOut forceDamp, SusState disNvelo, float tStep);
 
-#endif /* SENSORS_H_ *
+#endif /* CARSIM_H_ *

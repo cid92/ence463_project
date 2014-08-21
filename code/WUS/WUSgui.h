@@ -2,16 +2,17 @@
 //!	ENCE463 Project
 //! Author: Cid Gilani
 //! Date: 20 August 2014
-//! file: "gui.h"
+//! file: "WUSgui.h"
 //!
 //! This module updates the GUI and display for WUS
 //*****************************************************************************
 
-#ifndef GUI_H_
-#define GUI_H_
+#ifndef WUSGUI_H_
+#define WUSGUI_H_
 
 #include "carparameters.h"
 #include "roadgen.h"
+#include "button.h"
 
 /*called to update the screen*/
 extern void updateGui(void);
@@ -21,13 +22,16 @@ extern void initGui(void);
 /*Choose the screen to display with buttons*/
 extern void displayGui(void);
 
-/*Information to display*/
+/*Display to damping factor and actuation force received from ASC and the sensor outputs transmitted to ASC*/
 extern void displaySuspension(SimOut disNAccel, ConOut forceDamp);
 
-extern void displayRoad(SimGen surfaceBump, int roadType);
+/*Display the road surface mapping. The dzR and vzR are written into circular buffers*/
+extern void displayRoad(SimGen surfaceBump, uint8_t roadType, float[50] dzRbuff, float[50] vzRbuff );
 
+/*Display the acceleration and speed of the car*/
 extern void displayMotion(float currSpeed, float currAccel); 
 
-extern void displayWUS(char[30] ASC_status); 
+/*Display the status of ASC */
+extern void displayASC(char[30] ASC_status); 
 
-#endif /* GUI_H_ *
+#endif /* WUSGUI_H_ *

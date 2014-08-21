@@ -1,0 +1,25 @@
+//*****************************************************************************
+//!	ENCE463 Project
+//! Author: Campbell Reid-Tait
+//! Date: 20 August 2014
+//! file: "ADC.h"
+//!
+//! This module does everything to do with the adc
+//*****************************************************************************
+#ifndef ADC_H_
+#define ADC_H_
+
+/*called to read a certain ADC* eg. 2 for WUS 3 for ASC*/
+extern float readADC(int toreadADC );
+
+/*initilises a number of ADC inputs*/
+extern void initADC(int howmany);
+
+extern void startADC (int numADC);
+
+extern void stopADC (int numADC);
+ 
+/*convert ADC values to car parameters; eg. Fa, Bs, azS, azU,dzSU */
+extern float convert2Value(int howmnay, int numADC, float adc_values);
+
+#endif /* ADC_H_ */

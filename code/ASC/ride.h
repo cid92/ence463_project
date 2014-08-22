@@ -1,5 +1,5 @@
 //*****************************************************************************
-//!	ENCE463 Progect
+//!	ENCE463 Project
 //! Author: Campbell Reid-Tait
 //! Date: 20 August 2014
 //! file: "ride.h"

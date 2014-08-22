@@ -5,7 +5,7 @@
 //! file: "WUS.h"
 //!
 //! The main header file for the WUS device.
-//! Includes all the tasks to be registed with freeRTOS 
+//! Includes all the tasks to be registed with freeRTOS
 //*****************************************************************************
 
 #ifndef WUS_H
@@ -46,7 +46,7 @@ void Check_Buttons(void);
 void Send_Wheel_Pulse(void);
 
 void Generate_WUS_Status(void);
-/*Reads
+/*generates the graphic for the road surface if needed*/
 void Generate_Road_Surface_Graphic(void);
 
 

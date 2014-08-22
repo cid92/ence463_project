@@ -2,7 +2,7 @@
 //!	ENCE463 Project
 //! Author: Cid Gilani
 //! Date: 20 August 2014
-//! file: "csarparameter.h"
+//! file: "carparameter.h"
 //!
 //! This module classify the general parameters use by 
 //!	both ASC and WUS into structure.

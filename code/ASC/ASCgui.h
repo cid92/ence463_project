@@ -13,6 +13,8 @@
 #include "PID.h"
 #include "carspeed.h"
 #include "button.h"
+#include "ride.h"
+#include "drivers/rit128x96x4.h"
 
 /*called to update the screen*/
 extern void updateGui(void);
@@ -20,10 +22,13 @@ extern void updateGui(void);
 /*initilises the screen and gui */
 extern void initGui(void);
 
+/*Take button inputs to for user interface eg. change screen, change ride type*/
+extern void ascGui(void);
+
 /*Display to damping factor and actuation force transmitted to WUC and the sensor outputs received from ASC*/
 extern void displaySuspension(SimOut disNAccel, ConOut forceDamp);
 
-/*Display the acceleration and speed of the car*/
+/*Display the ride type, acceleration and speed of the car*/
 extern void displayMotion(float currSpeed, float currAccel);
 
 /*Display the status of WUC */

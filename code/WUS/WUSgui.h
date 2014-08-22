@@ -13,6 +13,7 @@
 #include "carparameters.h"
 #include "roadgen.h"
 #include "button.h"
+#include "drivers/rit128x96x4.h"
 
 /*called to update the screen*/
 extern void updateGui(void);
@@ -21,6 +22,9 @@ extern void initGui(void);
 
 /*Choose the screen to display with buttons*/
 extern void displayGui(void);
+
+/*Take button inputs to for user interface to change screen display*/
+extern void wusGui(void);
 
 /*Display to damping factor and actuation force received from ASC and the sensor outputs transmitted to ASC*/
 extern void displaySuspension(SimOut disNAccel, ConOut forceDamp);

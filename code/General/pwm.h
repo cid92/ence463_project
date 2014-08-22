@@ -10,6 +10,9 @@
 #ifndef PWM_H_
 #define PWM_H_
 
+#include "driverlib/pwm.h"
+#include "driverlib/gpio.h"
+
 /*Initialise a number of PWM pins eg. 2 for ASC 3 for WUS*/
 extern void initPWM(uint8_t PWM_NUM);
 

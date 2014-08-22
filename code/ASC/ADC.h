@@ -9,6 +9,9 @@
 #ifndef ADC_H_
 #define ADC_H_
 
+#include "driverlib/adc.h"
+#include "driverlib/gpio.h"
+
 /*called to read a certain ADC* eg. 2 for WUS 3 for ASC*/
 extern float readADC(uint8_t ADC_PIN );
 

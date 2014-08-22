@@ -12,6 +12,6 @@
 #define RIDE_H_
 
 /*Change the ride type (sedate, normal, sport, rally).*/
-extern void rideType (int newRide);
+extern void changeRideType (int newRide);
 
 #endif /* RIDE_H_ */

@@ -19,10 +19,20 @@ Road Surface generation
 
   Change rode type
 
+  wheelSpeedGen
+
+  simGen(currCarSpeed,tStep, roadType)
+	dZr
+	vZr
+
 Gui
   Update
 
   change screen
+
+
+	
+	
 
 
 #Both

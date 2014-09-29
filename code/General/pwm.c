@@ -110,4 +110,35 @@ extern void stopPWM (uint8_t PWM_PIN)
 /*convert car parameters such as Fa, Bs, azS, azU, dzSU to duty cycle*/
 extern float convert2Duty(uint8_t PWM_NUM, uint8_t PWM_PIN, uint8_t param_value)
 {
+	if (PWM_NUM == 2)
+	{
+		//Damping factor Bs
+		if (PWM_PIN ==  1)
+		{
+			return ((400*param_value/91)+100);
+		}
+		//Actuator force Fa
+		else if (PWM_PIN ==  4)
+		{
+			return ((2000*param_value/91)-1000);
+		}
+	}
+	if (PWM_NUM == 3)
+	{
+		//Accel. sprung azS
+		if (PWM_PIN ==  1)
+		{
+			return ((40*param_value/91)-20);
+		}
+		//Accel. unsprung azU
+		else if (PWM_PIN ==  4)
+		{
+			return ((2000*param_value/91)-1000);
+		}
+		//Wheel height dzSU
+		else if (PWM_PIN ==  5)
+		{
+			return ((0.5*param_value/91)-0.25);
+		}
+	}
 }

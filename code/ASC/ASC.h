@@ -14,10 +14,14 @@
 #define ASC_H
 
 
-#include "driverlib/pwm.h"
+
 #include "inc/hw_memmap.h"
 #include "inc/hw_types.h"
 #include "driverlib/gpio.h"
+#include "driverlib/sysctl.h"
+#include "driverlib/debug.h"
+#include "driverlib/pwm.h"
+#include "drivers/rit128x96x4.h"
 
 #define uint16_t unsigned short
 #define uint32_t unsigned long

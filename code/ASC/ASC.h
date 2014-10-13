@@ -13,6 +13,15 @@
 #ifndef ASC_H
 #define ASC_H
 
+
+#include "driverlib/pwm.h"
+#include "inc/hw_memmap.h"
+#include "inc/hw_types.h"
+#include "driverlib/gpio.h"
+
+#define uint16_t unsigned short
+#define uint32_t unsigned long
+
 /*Sets Car Speed mutex to zero*/
 void Start_Car(void);
 

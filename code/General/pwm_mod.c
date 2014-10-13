@@ -7,17 +7,21 @@
 //! This module does everything to do with the PWM
 //*****************************************************************************
 
-#include "pwm.h"
+#include "pwm_mod.h"
 
-#define FREQ 
+#define FREQ 100000
+uint16_t duty_cycle = 50;
+uint16_t PWM_PIN;
 
 /*Initialise a number of PWM pins eg. 2 for ASC 3 for WUS*/
-extern void initPWM(uint8_t PWM_NUM)
+extern void initPWM(uint16_t PWM_NUM)
 {
 	// Compute the PWM period based on the system clock.
 	SysCtlPeripheralEnable (SYSCTL_PERIPH_PWM);
 
 	//Configure PWM 1 from GEN 0
+    GPIOPinTypePWM (GPIO_PORTD_BASE, GPIO_PIN_1);
+
 	PWMGenConfigure (PWM_BASE, PWM_GEN_0,                    
 		PWM_GEN_MODE_UP_DOWN | PWM_GEN_MODE_NO_SYNC);
 	// Enable the PWM 1 output signals
@@ -29,6 +33,7 @@ extern void initPWM(uint8_t PWM_NUM)
 	PWMGenEnable (PWM_BASE, PWM_GEN_0);
 
 	//Configure PWM 4 from GEN 2
+	GPIOPinTypePWM (GPIO_PORTF_BASE, GPIO_PIN_2);
 	PWMGenConfigure (PWM_BASE, PWM_GEN_2,
 	PWM_GEN_MODE_UP_DOWN | PWM_GEN_MODE_NO_SYNC);
 	// Enable the PWM 4 output signals.
@@ -41,104 +46,105 @@ extern void initPWM(uint8_t PWM_NUM)
 
 	if (PWM_NUM == 3) // If the board is WUS
 	{
+		GPIOPinTypePWM (GPIO_PORTF_BASE, GPIO_PIN_3);
 		// Enable the PWM5 output signals.
 		PWMPulseWidthSet (PWM_BASE, PWM_OUT_5, SysCtlClockGet () /FREQ* duty_cycle/100);
 		// Enable the PWM5 generators.
-		PWMOutputState (PWM_BASE, PWM_OUT_5_BIT, true);
+		PWMOutputState (PWM_BASE, PWM_OUT_5_BIT, 1);
 	}
 }
 
-
-extern void changeDutyPWM(uint8_t PWM_PIN , float NEW_DUTY);
-{
-	if (PMW_PIN == 1)
+extern void changeDutyPWM(uint16_t PWM_PIN , float NEW_DUTY)
+ {
+	if (PWM_PIN == 1)
 	{
 			PWMPulseWidthSet (PWM_BASE, PWM_OUT_1, SysCtlClockGet () /FREQ* NEW_DUTY/100);
 	}
-	if (PMW_PIN == 4)
+	if (PWM_PIN == 4)
 	{
 			PWMPulseWidthSet (PWM_BASE,PWM_OUT_4, SysCtlClockGet () /FREQ* NEW_DUTY/100);;
 	}
-	if (PMW_PIN == 5)
+	if (PWM_PIN == 5)
 	{
 			PWMPulseWidthSet (PWM_BASE, PWM_OUT_5, SysCtlClockGet () /FREQ* NEW_DUTY/100);
 	}
 }
 
-extern void changeFrequrencyPWM(uint8_t PWM_PIN , uint8_t NEW_FREQ)
+extern void changeFrequrencyPWM(uint16_t PWM_PIN , uint16_t NEW_FREQ)
 {
-	if (PMW_PIN == 1)
+	if (PWM_PIN == 1)
 	{
 		PWMGenPeriodSet (PWM_BASE, PWM_GEN_0, (SysCtlClockGet ()/NEW_FREQ));
 	}
-	if (PMW_PIN == 4 || PWM_PIN == 5)
+	if (PWM_PIN == 4 || PWM_PIN == 5)
 	{
 		PWMGenPeriodSet (PWM_BASE, PWM_GEN_2, (SysCtlClockGet ()/NEW_FREQ));
 	}
 }
-
-extern void startPWM(uint8_t PWM_PIN)
+extern void startPWM(uint16_t PWM_PIN)
 {
-	if (PMW_PIN == 1)
+	if (PWM_PIN == 1)
 	{
 		PWMOutputState (PWM_BASE, PWM_OUT_1_BIT, true);
 	}
-	if (PMW_PIN == 4)
+	if (PWM_PIN == 4)
 	{
 		PWMOutputState (PWM_BASE, PWM_OUT_4_BIT, true);
 	}
-	if (PMW_PIN == 5)
+	if (PWM_PIN == 5)
 	{
 		PWMOutputState (PWM_BASE, PWM_OUT_5_BIT, true);
 	}
 }
-extern void stopPWM (uint8_t PWM_PIN)
+extern void stopPWM (uint16_t PWM_PIN)
 {
-	if (PMW_PIN == 1)
+	if (PWM_PIN == 1)
 	{
 		PWMOutputState (PWM_BASE, PWM_OUT_1_BIT, false);
 	}
-	if (PMW_PIN == 4)
+	if (PWM_PIN == 4)
 	{
 		PWMOutputState (PWM_BASE, PWM_OUT_4_BIT, false);
 	}
-	if (PMW_PIN == 5)
+	if (PWM_PIN == 5)
 	{
 		PWMOutputState (PWM_BASE, PWM_OUT_5_BIT, false);
 	}
 }
-/*convert car parameters such as Fa, Bs, azS, azU, dzSU to duty cycle*/
-extern float convert2Duty(uint8_t PWM_NUM, uint8_t PWM_PIN, uint8_t param_value)
+/*convert car parameters such as fa, bs, azs, azu, dzsu to duty cycle*/
+extern float convert2duty(uint16_t pwm_num, uint16_t pwm_pin, uint16_t param_value)
 {
-	if (PWM_NUM == 2)
+	float duty;
+	if (pwm_num == 2)
 	{
-		//Damping factor Bs
-		if (PWM_PIN ==  1)
+		//damping factor bs
+		if (pwm_pin ==  1)
 		{
-			return ((400*param_value/91)+100);
+			duty = ((400*param_value/91)+100);
 		}
-		//Actuator force Fa
-		else if (PWM_PIN ==  4)
+		//actuator force fa
+		else if (pwm_pin ==  4)
 		{
-			return ((2000*param_value/91)-1000);
+			duty =  ((2000*param_value/91)-1000);
 		}
 	}
-	if (PWM_NUM == 3)
+	if (pwm_num == 3)
 	{
-		//Accel. sprung azS
-		if (PWM_PIN ==  1)
+		//accel. sprung azs
+		if (pwm_pin ==  1)
 		{
-			return ((40*param_value/91)-20);
+			duty = ((40*param_value/91)-20);
 		}
-		//Accel. unsprung azU
-		else if (PWM_PIN ==  4)
+		//accel. unsprung azu
+		else if (pwm_pin ==  4)
 		{
-			return ((2000*param_value/91)-1000);
+			duty = ((2000*param_value/91)-1000);
 		}
-		//Wheel height dzSU
-		else if (PWM_PIN ==  5)
+		//wheel height dzsu
+		else if (pwm_pin ==  5)
 		{
-			return ((0.5*param_value/91)-0.25);
+			duty = ((0.5*param_value/91)-0.25);
 		}
 	}
+	return duty;
 }

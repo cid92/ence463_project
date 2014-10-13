@@ -12,6 +12,8 @@
 #define ROADGEN_H_
 
 #include "carspeed.h" 
+#include <stdlib.h>
+
 
 struct SimGen {
 	float dzR;
@@ -22,5 +24,10 @@ extern uint8_t RoadType(void);
 
 /*Generate the road surface with pseudo random number generator */
 extern SimGen roadSurfGen(float currSpeed, uint8_t roadType, float tStep);
+
+
+
+/* return a random number between 0 and limit inclusive. */
+int rand_lim(int limit);
 
 #endif /* ROADGEN_H_ *

@@ -6,11 +6,12 @@
 //!
 //! This module reads the buttons and apply button debounced.
 //*****************************************************************************
-#ifndef BUTTON_H_
-#define BUTTON_H_
 
 #include "driverlib/gpio.h"
-/*FreeRTOS is to handle the button debounced.
+
+
+
+/*FreeRTOS is to handle the button debounced. */
 
 extern void buttonPress(void); /*called to poll the buttons*/
 extern void initButton(void); /*initilises the buttons */

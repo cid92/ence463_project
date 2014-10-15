@@ -11,6 +11,46 @@
 #include "messages.h"
 
 
+
+//*****************************************************************************
+//
+// Decoding Messages.
+//
+//*****************************************************************************
+extern void decode(char message[]){
+	i = 0;
+	for (i = 0; i <= BuffSize; i++){
+		//WUS status
+		if (message[i] == 'W'){
+			w = ((uint32_t)message[i+3] - (uint32_t)'0')*16;
+			w = w + (uint32_t)message[i+4] - (uint32_t)'0';
+			i = i+4;
+		}
+		//Road type
+		else if (message[i] == 'R'){
+			r = ((uint32_t)message[i+1] - (uint32_t)'0')*10;
+			r = r + ((uint32_t)message[i+2] - (uint32_t)'0');
+			i = i+2;
+		}
+		//Reset the car speed to 0
+		else if (message[i] == 'S'){
+			s = 1;
+
+		}
+		else if (message[i] == 'A'){
+			a = ((float)message[i+1] - (float)'0')*10;
+			a = a + ((float)message[i+2] - (float)'0');
+			a = a + ((float)message[i+4] - (float)'0')*0.1;
+			a = a + ((float)message[i+5] - (float)'0')*0.01;
+			a = a + ((float)message[i+6] - (float)'0')*0.001;
+		}
+		//Start the simulation
+		else if (message[i] == 'M'){
+			m = 1;
+		}
+	}
+ }
+
 //*****************************************************************************
 //
 // Send a string to the UART.
@@ -65,7 +105,7 @@ void UART1IntHandler(void)
     	   buff[count] = (char)c;
        }
        count++;
-       if (count >= 25){
+       if (count >= BuffSize){
     	   count = 0;
        }
     }

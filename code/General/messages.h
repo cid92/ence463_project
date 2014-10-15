@@ -16,12 +16,26 @@
 
 #define uint16_t unsigned short
 #define uint32_t unsigned long
-
+#define BuffSize 7
 
 /*Declare those variables in the main file*/
 extern uint16_t count;
 extern int flag;
-extern char buff[25];
+extern char buff[BuffSize];
+extern uint32_t w;
+extern uint16_t r;
+extern uint16_t s;
+extern float a;
+extern uint16_t m;
+extern uint16_t i;
+
+
+//*****************************************************************************
+//
+// Decoding Messages.
+//
+//*****************************************************************************
+extern void decode(char message[]);
 
 //*****************************************************************************
 //

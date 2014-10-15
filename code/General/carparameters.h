@@ -23,7 +23,7 @@ extern struct ConOut {
 	float Fa;
 	float Bs;
 	};
-
+/*These parameters are calculated by the WUS and sent to ASC*/
 extern struct SusState {
 	float dzS;
 	float vzS;

@@ -42,7 +42,7 @@ extern void UARTSend(const unsigned char *pucbuff, unsigned long ulCount)
 void UART1IntHandler(void)
 {
 	uint32_t ulStatus;
-	count = 0;
+	//count = 0;
     //
     // Get the interrrupt status.
     //
@@ -65,9 +65,9 @@ void UART1IntHandler(void)
     	   buff[count] = (char)c;
        }
        count++;
-      // if (count >= 6){
-    	//   count = 0;
-       //}
+       if (count >= 25){
+    	   count = 0;
+       }
     }
 }
 

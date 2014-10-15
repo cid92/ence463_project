@@ -21,7 +21,7 @@
 /*Declare those variables in the main file*/
 extern uint16_t count;
 extern int flag;
-extern char buff[6];
+extern char buff[25];
 
 //*****************************************************************************
 //

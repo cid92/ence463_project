@@ -1,25 +1,52 @@
 //*****************************************************************************
 //!	ENCE463 Project
-//! Author: Campbell Reid-Tait
+//! Author: Vincent Crowe, Campbell Reid-Tait, Cid Gilani
 //! Date: 20 August 2014
 //! file: "messages.h"
 //!
-//! This module controls the messing between devices.
+//! The main header file for the ASC device.
+//! Includes all the tasks to be registed with freeRTOS
 //*****************************************************************************
+
 #ifndef MESSAGES_H_
 #define MESSAGES_H_
 
-#include "driverlib/uart.h"
-#include "driverlib/interrupt.h"
-#include "driverlib/gpio.h"
 
-/*called to send a message*/
-extern void sendMessage(str * message);
+#include "uart_echo.h"
 
-/*called to reseave a message. Returns the recieved message*/
-extern int recieveMessage( void );
+#define uint16_t unsigned short
+#define uint32_t unsigned long
 
-/*initilises the UART pins etc */
-extern void initMessage(void);
+
+/*Declare those variables in the main file*/
+extern uint16_t count;
+extern int flag;
+extern char buff[6];
+
+//*****************************************************************************
+//
+// Send a string to the UART.
+//
+//*****************************************************************************
+extern void UARTSend(const unsigned char *pucBuffer, unsigned long ulCount);
+
+//*****************************************************************************
+//
+// Interrupt Handler for Rx.
+// Note: Need to be declared in starup_ccs.c
+//
+//*****************************************************************************
+
+
+
+extern void UART1IntHandler(void);
+
+//*****************************************************************************
+//
+// Initialise the UART1 pins.
+//
+//*****************************************************************************
+extern void initUART(void);
+
 
 #endif /* MESSAGES_H_ */

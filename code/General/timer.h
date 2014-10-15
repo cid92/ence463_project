@@ -9,11 +9,20 @@
 #ifndef TIMER_H_
 #define TIMER_H_
 
+
+#include "inc/hw_memmap.h"
+#include "inc/hw_types.h"
+#include "inc/hw_timer.h"
+#include "inc/hw_ints.h"
 #include "driverlib/gpio.h"
 #include "driverlib/timer.c"
+#include "driverlib/interrupt.h"
+#include "driverlib/sysctl.h"
 
 
-extern void initTimer(void); /*initilises the timer */
+extern void Timer2BIntHandler(void); /*interupt timer for buttons */ 
+
+extern void initTimer(void); /*initilises the timer for buttons */
 
 
 

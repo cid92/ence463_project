@@ -4,7 +4,7 @@
 //!	ENCE463 Project
 //! Author: Campbell Reid-Tait
 //! Date: 20 August 2014
-//! file: "button.h"
+//! file: "button.c"
 //!
 //! This module reads the buttons and apply button debounced.
 //*****************************************************************************
@@ -45,12 +45,12 @@ extern void buttonPress(void)
 	// See if the up button was just pressed.
 	if((ulDelta & 0x08) && !(g_ucSwitches & 0x08))
 	{
-	
+		
 	}
 	// See if the down Button was just pressed.
 	if((ulDelta & 0x10) && !(g_ucSwitches & 0x10))
 	{
-	
+		
 	}
 	// See if the left button was just pressed.
 	if((ulDelta & 0x20) && !(g_ucSwitches & 0x20))

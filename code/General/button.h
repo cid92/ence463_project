@@ -6,6 +6,8 @@
 //!
 //! This module reads the buttons and apply button debounced.
 //*****************************************************************************
+#ifndef BUTTON_H_
+#define BUTTON_H_
 
 #include "driverlib/gpio.h"
 

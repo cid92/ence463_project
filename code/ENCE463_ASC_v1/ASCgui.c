@@ -19,7 +19,19 @@ extern int accel1 = 0;
 extern int accel2 = 0;
 extern int state = 0;
 extern int state1 = 0;
+
+int state_old = 10;
+
 int testValue_old = 0;
+
+
+int roadtype_old = 10;
+
+int ridenum_old = 10;
+
+int grade_old = 10;
+
+int select_old = 10;
 /*called to update the screen*/
 extern void updateGui(void)
 {
@@ -53,13 +65,11 @@ extern void displayGui(void)
 	}
 
 	if (state == 1){
-		if (state1 <= 1 && state1!= -1){
+		if (state != state_old){
 			RIT128x96x4Clear();
-			state1++;
+			state_old = state;
 		}
-		else if (state1 > 1){
-			state1 = -1;
-		}
+
 		adc_reading_test  = readADC();
 		sprintf(strBuf, "zS: %lu", adc_reading_test[0]);
 		sprintf(strBuf1, "zU: %lu", adc_reading_test[1]);
@@ -70,12 +80,9 @@ extern void displayGui(void)
 		RIT128x96x4StringDraw(strBuf2, 10, 50, 15);
 	}
 	if (state == 2){
-		if (state1 <= 1 && state1!= -1){
+		if (state != state_old){
 			RIT128x96x4Clear();
-			state1++;
-		}
-		else if (state1 > 1){
-			state1 = -1;
+			state_old = state;
 		}
 		//sprintf(strBuf, "zS: %3.2f", (float)2.56);
 		sprintf(strBuf1, "zU: %lu", accel);
@@ -87,33 +94,100 @@ extern void displayGui(void)
 		RIT128x96x4StringDraw( "Speed: SELECT",  35, 70, 15);
 	}
 	if (state == 3){
-		if (state1 <= 1 && state1!= -1){
+		if (state != state_old){
 			RIT128x96x4Clear();
-			state1++;
+			state_old = state;
+			roadtype_old = 10;
+			grade_old = 10;
+			ridenum_old = 10;
 		}
-		else if (state1 > 1){
-			state1 = -1;
-		}
+
+
 		RIT128x96x4StringDraw( "WUS Status",  30, 10, 15);
+
 		sprintf(strBuf, "RX: 0x%x", 0);
 		sprintf(strBuf1, "TX: 0x%x", 0);
-		sprintf(strBuf2, "Road Type: %d", roadtype);
+
 		RIT128x96x4StringDraw(strBuf, 10, 20, 15);
 		RIT128x96x4StringDraw( strBuf1,  10, 30, 15);
-		RIT128x96x4StringDraw( strBuf2,  10, 50, 15);
-		if (ridenum == 0){
-			RIT128x96x4StringDraw("Ride Type: Sedate",  10, 60, 15);
+
+		RIT128x96x4StringDraw( "WUS Status",  30, 10, 15);
+
+
+		if (select != select_old){
+			switch (select) {
+				case 0:
+					RIT128x96x4StringDraw( ">",  0, 50, 15);
+					RIT128x96x4StringDraw( " ",  0, 60, 15);
+					RIT128x96x4StringDraw( " ",  0, 70, 15);
+					break;
+				case 1:
+					RIT128x96x4StringDraw( " ",  0, 50, 15);
+					RIT128x96x4StringDraw( ">",  0, 60, 15);
+					RIT128x96x4StringDraw( " ",  0, 70, 15);
+					break;
+
+				case 2:
+					RIT128x96x4StringDraw( " ",  0, 50, 15);
+					RIT128x96x4StringDraw( " ",  0, 60, 15);
+					RIT128x96x4StringDraw( ">",  0, 70, 15);
+					break;
+
+			}
 		}
-		else if(ridenum == 1){
-			RIT128x96x4StringDraw("Ride Type: Normal",  10, 60, 15);
+
+		if (roadtype != roadtype_old) {
+			RIT128x96x4StringDraw( "Road Type:                    ", 15, 50, 15);
+
+			switch (roadtype) {
+				case 1 :
+					RIT128x96x4StringDraw( "Road Type: Tarseal", 10, 50, 15);
+					break;
+				case 2:
+					RIT128x96x4StringDraw( "Road Type: Gravel", 10, 50, 15);
+					break;
+				case 3:
+					RIT128x96x4StringDraw( "Road Type: Track", 10, 50, 15);
+					break;
+				default:
+					RIT128x96x4StringDraw( "Road Type: Error", 10, 50, 15);
+					break;
+			}
+			roadtype_old = roadtype;
 		}
-		else if(ridenum == 2){
-			RIT128x96x4StringDraw("Ride Type: Sport",  10, 60, 15);
+
+		if ( grade != grade_old ) {
+			RIT128x96x4StringDraw( "Grade:              ",  10, 60, 15);
+			sprintf(strBuf2, "Grade: %d", grade);
+			RIT128x96x4StringDraw( strBuf2,  10, 60, 15);
+			grade_old = grade;
 		}
-		else if(ridenum == 3){
-			RIT128x96x4StringDraw("Ride Type: Rally",  10, 60, 15);
+
+		if (ridenum != ridenum_old) {
+			RIT128x96x4StringDraw( "Ride Type:                    ", 10, 70, 15);
+			switch (ridenum) {
+				case 0 :
+					RIT128x96x4StringDraw("Ride Type: Sedate",  10, 70, 15);
+					break;
+				case 1 :
+					RIT128x96x4StringDraw("Ride Type: Normal",  10, 70, 15);
+					break;
+				case 2:
+					RIT128x96x4StringDraw("Ride Type: Sport",  10, 70, 15);
+					break;
+				case 3:
+					RIT128x96x4StringDraw("Ride Type: Rally",  10, 70, 15);
+					break;
+				default:
+					RIT128x96x4StringDraw("Ride Type: Error",  10, 70, 15);
+					break;
+			}
+			ridenum_old = ridenum;
 		}
+
 	}
+
+
 
 }
 

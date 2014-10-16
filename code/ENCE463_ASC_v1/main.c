@@ -45,6 +45,10 @@ executing. */
 const char *pcTextForTask1 = "Task 1 is running\n";
 const char *pcTextForTask2 = "Task 2 is running\n";
 
+
+
+
+
 /*-----------------------------------------------------------*/
 
 int main( void )
@@ -80,6 +84,9 @@ int main( void )
 
 	xTaskCreate( vPollButtonFunction, "Poll Button", 440, NULL, 1, NULL );
 
+
+	xTaskCreate( vSendStatusFunction, "Send Status Message", 240, NULL, 1, NULL );
+
 	/* Start the scheduler so our tasks start executing. */
 	vTaskStartScheduler();	
 	
@@ -89,6 +96,37 @@ int main( void )
 	for( ;; );
 }
 /*-----------------------------------------------------------*/
+
+void vSendStatusFunction( void )
+{
+
+	//char testBuf[50];
+	volatile unsigned long ul;
+	portTickType xLastWakeTime;
+
+	xLastWakeTime = xTaskGetTickCount();
+
+	unsigned long ulCount = 3;
+	unsigned char sendbuffer[3] = {'R','1','1'};
+
+	/* As per most tasks, this task is implemented in an infinite loop. */
+	for( ;; )
+	{
+
+
+
+
+		sendbuffer[0] = grade + 48;
+		sendbuffer[1] = roadtype + 48;
+		sendbuffer[2] = 'R';
+
+		UARTSend(sendbuffer, ulCount);
+
+		/* Enter the blocked state for 100 mircoseconds */
+		vTaskDelayUntil(&xLastWakeTime, (1/ portTICK_RATE_MS) );
+	}
+}
+
 
 void vTaskFunction( void *pvParameters )
 {

@@ -18,8 +18,10 @@ static unsigned char g_ucSwitches = 0xf8;
 // are the same as g_ucSwitches.
 static unsigned char g_ucSwitchClockA = 0;
 static unsigned char g_ucSwitchClockB = 0;
-extern int roadtype = 10;
+extern int roadtype = 0;
 extern int ridenum = 0;
+extern int grade = 0;
+extern int select = 0;
 /*called to poll the buttons*/
 extern void buttonPress(void) 
 {
@@ -55,9 +57,9 @@ extern void buttonPress(void)
 		}
 		//Increase Roadtype
 		if (state == 3){
-			roadtype++;
-			if(roadtype >= 33){
-				roadtype = 33;
+			select--;
+			if( select < 0){
+				select = 0;
 			}
 		}
 		//testValue++;
@@ -75,10 +77,12 @@ extern void buttonPress(void)
 		}
 		//Decrease Roadtype
 		if (state == 3){
-			roadtype--;
-			if (roadtype <= 10){
-				roadtype = 10;
+			select++;
+			if( select > 2){
+				select = 2;
 			}
+
+
 		}
 	}
 	// See if the left button was just pressed.
@@ -93,11 +97,12 @@ extern void buttonPress(void)
 	// See if the right button was just pressed.
 	if((ulDelta & 0x40) && !(g_ucSwitches & 0x40))
 	{
+		state1 = 0;
 		state++;
 		if (state >= 4){
 			state =1;
 		}
-		state1 = 0;
+
 	}
 	// See if the select button was just pressed.
 	if((ulDelta & 0x80) && !(g_ucSwitches & 0x80))
@@ -113,9 +118,26 @@ extern void buttonPress(void)
 			//Increase the speed when button pressed.
 		}
 		if (state == 3){
-			ridenum++;
-			if (ridenum >= 3){
-				ridenum = 0;
+			switch (select) {
+				case 0:
+					roadtype++;
+					if (roadtype > 3){
+						roadtype = 1;
+					}
+					break;
+				case 1:
+					grade++;
+					if (grade > 3){
+						grade = 0;
+					}
+					break;
+				case 2:
+					ridenum++;
+					if (ridenum > 3){
+						ridenum = 0;
+					}
+					break;
+
 			}
 		}
 	}

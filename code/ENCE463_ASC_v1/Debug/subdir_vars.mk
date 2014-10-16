@@ -19,7 +19,7 @@ C_SRCS += \
 ../rit128x96x4.c \
 ../startup_ccs.c \
 ../tasks.c \
-J:/Courses/ENCE361/StellarisWare/utils/ustdlib.c 
+J:/Courses/ENCE361/StellarisWare/boards/StellarisWare/utils/ustdlib.c 
 
 OBJS += \
 ./ADC.obj \
@@ -94,6 +94,6 @@ C_SRCS__QUOTED += \
 "../rit128x96x4.c" \
 "../startup_ccs.c" \
 "../tasks.c" \
-"J:/Courses/ENCE361/StellarisWare/utils/ustdlib.c" 
+"J:/Courses/ENCE361/StellarisWare/boards/StellarisWare/utils/ustdlib.c" 
 
 

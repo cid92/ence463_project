@@ -33,9 +33,9 @@
 /* Demo includes. */
 #include "demo_code/basic_io.h"
 
+
 /* Dispaly */
 #include "ASCgui.h"
-
 #include "button.h"
 #include "ADC.h"
 #include "PWM.h"
@@ -49,9 +49,15 @@
 extern int roadtype;
 extern int ridetype;
 extern int ridenum;
+extern int grade;
+extern int select;
+
+
+
 
 /* The task function. */
 void vTaskFunction( void *pvParameters );
+void vSendStatusFunction( void );
 void vUpdateGUIFunction( void );
 void vPollButtonFunction( void );
 
